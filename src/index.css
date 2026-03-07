@@ -1,0 +1,325 @@
+@import url("https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Manrope:wght@400;500;600;700&display=swap");
+@import "tailwindcss";
+
+:root {
+  --ink: #0f172a;
+  --muted: #475569;
+  --sand: #f9f7f1;
+  --sun: #f59e0b;
+  --teal: #0d9488;
+  --card: rgba(255, 255, 255, 0.78);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: "Manrope", "Segoe UI", sans-serif;
+  color: var(--ink);
+  background:
+    radial-gradient(
+      circle at 15% 15%,
+      rgba(245, 158, 11, 0.15),
+      transparent 32%
+    ),
+    radial-gradient(
+      circle at 85% 10%,
+      rgba(13, 148, 136, 0.16),
+      transparent 35%
+    ),
+    linear-gradient(120deg, #fffef9 0%, var(--sand) 48%, #f3f7ff 100%);
+  background-attachment: fixed;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  font-family: "Space Grotesk", "Segoe UI", sans-serif;
+}
+
+.app-shell {
+  position: relative;
+  isolation: isolate;
+  overflow-x: clip;
+}
+
+.bg-grid {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  background-image:
+    linear-gradient(rgba(148, 163, 184, 0.08) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(148, 163, 184, 0.08) 1px, transparent 1px);
+  background-size: 34px 34px;
+  pointer-events: none;
+}
+
+.halo {
+  position: fixed;
+  border-radius: 9999px;
+  filter: blur(70px);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.halo-1 {
+  width: min(42vw, 520px);
+  height: min(42vw, 520px);
+  top: -120px;
+  left: -120px;
+  background: rgba(245, 158, 11, 0.22);
+}
+
+.halo-2 {
+  width: min(40vw, 500px);
+  height: min(40vw, 500px);
+  right: -130px;
+  top: 120px;
+  background: rgba(13, 148, 136, 0.2);
+}
+
+.hero-panel {
+  background: linear-gradient(
+    140deg,
+    rgba(255, 255, 255, 0.92),
+    rgba(255, 253, 245, 0.88)
+  );
+  border: 1px solid rgba(148, 163, 184, 0.35);
+  border-radius: 1.5rem;
+  box-shadow:
+    0 14px 36px rgba(15, 23, 42, 0.08),
+    inset 0 1px 0 rgba(255, 255, 255, 0.8);
+  padding: 1.25rem;
+}
+
+@media (min-width: 640px) {
+  .hero-panel {
+    padding: 2rem;
+  }
+}
+
+.hero-accent {
+  display: block;
+  color: #ca8a04;
+  text-shadow: 0 8px 25px rgba(245, 158, 11, 0.15);
+}
+
+.hero-stats {
+  margin-top: 1.5rem;
+  display: grid;
+  grid-template-columns: repeat(1, minmax(0, 1fr));
+  gap: 0.75rem;
+}
+
+@media (min-width: 768px) {
+  .hero-stats {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+.stat-pill {
+  padding: 0.85rem 0.95rem;
+  border-radius: 0.85rem;
+  border: 1px solid rgba(148, 163, 184, 0.32);
+  background: rgba(255, 255, 255, 0.85);
+  box-shadow: 0 6px 18px rgba(15, 23, 42, 0.06);
+}
+
+.stat-title {
+  display: block;
+  font-size: 0.72rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.stat-value {
+  display: block;
+  margin-top: 0.2rem;
+  font-weight: 600;
+  color: #0b1325;
+}
+
+.surface-card {
+  border: 1px solid rgba(148, 163, 184, 0.28);
+  background: var(--card);
+  border-radius: 1.2rem;
+  padding: 1.25rem;
+  backdrop-filter: blur(8px);
+  box-shadow: 0 10px 30px rgba(15, 23, 42, 0.06);
+}
+
+@media (min-width: 768px) {
+  .surface-card {
+    padding: 1.6rem;
+  }
+}
+
+.section-kicker {
+  margin: 0;
+  text-transform: uppercase;
+  font-size: 0.74rem;
+  letter-spacing: 0.13em;
+  color: #0f766e;
+  font-weight: 700;
+}
+
+.section-title {
+  margin-top: 0.35rem;
+  margin-bottom: 0;
+  font-size: clamp(1.45rem, 1.2rem + 1vw, 2.1rem);
+  color: #0f172a;
+  font-weight: 700;
+}
+
+.canvas-shell {
+  background:
+    radial-gradient(
+      circle at 65% 15%,
+      rgba(13, 148, 136, 0.16),
+      transparent 32%
+    ),
+    radial-gradient(
+      circle at 25% 95%,
+      rgba(245, 158, 11, 0.15),
+      transparent 35%
+    ),
+    linear-gradient(150deg, rgba(255, 255, 255, 0.9), rgba(248, 250, 252, 0.85));
+}
+
+.tech-group {
+  border: 1px solid rgba(148, 163, 184, 0.27);
+  background: rgba(255, 255, 255, 0.75);
+  border-radius: 0.85rem;
+  padding: 0.8rem;
+}
+
+.tech-badge {
+  transform: translateY(0);
+  transition: transform 180ms ease;
+}
+
+.tech-badge:hover {
+  transform: translateY(-2px);
+}
+
+.tech-icon-pill {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.45rem 0.6rem;
+  border: 1px solid rgba(148, 163, 184, 0.35);
+  background: rgba(255, 255, 255, 0.92);
+  border-radius: 0.85rem;
+}
+
+.skills-root {
+  display: grid;
+  grid-template-columns: repeat(1, minmax(0, 1fr));
+  gap: 0.5rem;
+}
+
+@media (min-width: 768px) {
+  .skills-root {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.9rem;
+  }
+}
+
+.skill-row {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.3rem 0;
+  font-size: 0.92rem;
+}
+
+.project-card {
+  border: 1px solid rgba(148, 163, 184, 0.3);
+  border-radius: 0.95rem;
+  padding: 1rem;
+  background: linear-gradient(
+    160deg,
+    rgba(255, 255, 255, 0.9),
+    rgba(248, 250, 252, 0.75)
+  );
+}
+
+.laptop-screen-content {
+  width: 660px;
+  height: 410px;
+  border-radius: 14px;
+  overflow: hidden;
+  background: #0b1220;
+}
+
+.laptop-screen-wrapper {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  overscroll-behavior: contain;
+  border-radius: inherit;
+}
+
+.laptop-screen-image {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  user-select: none;
+  -webkit-user-drag: none;
+}
+
+.reveal {
+  animation: revealUp 720ms ease both;
+}
+
+.reveal-delay-1 {
+  animation-delay: 120ms;
+}
+
+.reveal-delay-2 {
+  animation-delay: 220ms;
+}
+
+@keyframes revealUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal,
+  .reveal-delay-1,
+  .reveal-delay-2 {
+    animation: none;
+  }
+}
+
+.glass {
+  background-color: rgba(255, 255, 255, 0.6);
+  -webkit-backdrop-filter: blur(6px);
+  backdrop-filter: blur(6px);
+}
+
+.lead {
+  font-size: 1.125rem;
+  line-height: 1.75rem;
+  color: #475569;
+}
