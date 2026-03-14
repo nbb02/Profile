@@ -41,7 +41,12 @@ export default function Rubiks() {
         </Float>
       </Suspense>
 
-      <OrbitControls enablePan={false} autoRotate autoRotateSpeed={1.1} />
+      <OrbitControls
+        enablePan={false}
+        enableZoom={false}
+        autoRotate
+        autoRotateSpeed={1.1}
+      />
     </Canvas>
   )
 }

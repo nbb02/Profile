@@ -3,6 +3,7 @@ import * as SiIcons from "react-icons/si"
 import type { IconType } from "react-icons"
 import Rubiks from "./components/rubiks"
 import Laptop from "./components/laptop"
+import ProfessionalExperience from "./components/ProfessionalExperience"
 import { FaLinkedin } from "react-icons/fa"
 
 type SkillItem = {
@@ -423,31 +424,6 @@ function ProjectsDetails() {
               </li>
             </ul>
           </div>
-
-          <div className="project-card">
-            <h3 className="font-medium text-lg">Professional Journey</h3>
-            <div className="mt-2 text-sm text-slate-600">
-              <p>
-                <strong>Sep 2025 – Present</strong> — Software Engineer
-                (Location-based booking backends, live-tracking UI)
-              </p>
-              <p className="mt-2">
-                <strong>Apr 2025 – Sep 2025</strong> — Backend Developer (arc,
-                wrc, rst, cra, pct, ia, pm, jm)
-              </p>
-              <p className="mt-2">
-                <strong>Jan 2025</strong> — Backend Developer Internship
-              </p>
-              <p className="mt-2">
-                <strong>Jan 2025</strong> — Freelance (Laravel fullstack,
-                e-commerce, blockchain helpers)
-              </p>
-              <p className="mt-2">
-                <strong>Jan 2024</strong> — School Projects: POS & Inventory
-                (React+Firebase), Population Management (Laravel+React)
-              </p>
-            </div>
-          </div>
         </div>
       </div>
     </section>
@@ -651,12 +627,18 @@ export default function App() {
           <a href="https://skfb.ly/opCGZ" target="_blank" rel="noreferrer">
             https://skfb.ly/opCGZ
           </a>{" "}
-          | Laptop {" "}
-          <a href="https://codesandbox.io/p/sandbox/9keg6" target="_blank" rel="noreferrer">
+          | Laptop{" "}
+          <a
+            href="https://codesandbox.io/p/sandbox/9keg6"
+            target="_blank"
+            rel="noreferrer"
+          >
             https://codesandbox.io/p/sandbox/9keg6
           </a>
         </footer>
       </main>
+
+      <ProfessionalExperience />
     </div>
   )
 }

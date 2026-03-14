@@ -318,6 +318,146 @@ h4 {
   backdrop-filter: blur(6px);
 }
 
+.professional-scroll-shell {
+  position: relative;
+  height: 200vh;
+}
+
+.professional-section {
+  position: sticky;
+  top: 0;
+  overflow: hidden;
+  min-height: 100vh;
+  width: 100%;
+  display: flex;
+  align-items: center;
+}
+
+.professional-sky {
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  pointer-events: none;
+}
+
+.sky-body {
+  position: absolute;
+  width: 168px;
+  height: 168px;
+  border-radius: 9999px;
+  isolation: isolate;
+  overflow: visible;
+  will-change: left, opacity;
+  transform: translate(-50%, -50%);
+  transition:
+    left 220ms ease-out,
+    top 220ms ease-out,
+    opacity 220ms ease-out;
+}
+
+.sky-body::before {
+  content: "";
+  position: absolute;
+  inset: 18%;
+  border-radius: 9999px;
+  z-index: -1;
+  filter: blur(24px);
+  transform: scale(1.28);
+}
+
+.sky-body-shell {
+  pointer-events: auto;
+  z-index: 4;
+  user-select: none;
+}
+
+.sky-sun::before {
+  background: radial-gradient(
+    circle,
+    rgba(251, 191, 36, 0.78) 0%,
+    rgba(245, 158, 11, 0.42) 46%,
+    rgba(245, 158, 11, 0.12) 68%,
+    transparent 82%
+  );
+}
+
+.sky-moon {
+  width: 152px;
+  height: 152px;
+}
+
+.sky-moon::before {
+  background: radial-gradient(
+    circle,
+    rgba(219, 234, 254, 0.52) 0%,
+    rgba(147, 197, 253, 0.28) 48%,
+    rgba(147, 197, 253, 0.08) 72%,
+    transparent 84%
+  );
+}
+
+.sky-model-canvas {
+  width: 100% !important;
+  height: 100% !important;
+  overflow: visible;
+}
+
+.sky-model-canvas canvas {
+  background: transparent !important;
+}
+
+.professional-content {
+  position: relative;
+  z-index: 2;
+  width: min(72rem, 100%);
+  margin: 0 auto;
+  padding: 7rem 1.25rem 2rem;
+}
+
+.professional-kicker {
+  color: var(--experience-kicker, #164e63);
+}
+
+.professional-title {
+  color: var(--experience-title, #0f172a);
+  text-shadow: 0 6px 20px var(--experience-title-shadow, rgba(15, 23, 42, 0.12));
+}
+
+.professional-role {
+  border: 1px solid var(--experience-card-border, rgba(15, 23, 42, 0.08));
+  background: var(--experience-card-bg, rgba(255, 255, 255, 0.8));
+  border-radius: 0.95rem;
+  padding: 0.95rem;
+  backdrop-filter: blur(6px);
+}
+
+.professional-role-title {
+  margin: 0;
+  font-size: 1.05rem;
+  color: var(--experience-role-title, #0f172a);
+}
+
+.professional-role-meta {
+  margin: 0.45rem 0 0;
+  color: var(--experience-role-meta, #334155);
+  font-size: 0.92rem;
+  font-weight: 600;
+}
+
+.professional-role-list {
+  margin: 0.65rem 0 0;
+  padding-left: 1rem;
+  color: var(--experience-role-body, #0f172a);
+  line-height: 1.55;
+  font-size: 0.95rem;
+}
+
+@media (min-width: 640px) {
+  .professional-content {
+    padding: 8rem 1.75rem 2.5rem;
+  }
+}
+
 .lead {
   font-size: 1.125rem;
   line-height: 1.75rem;
