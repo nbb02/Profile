@@ -11,7 +11,7 @@ import {
 import { Suspense, useEffect, useRef } from "react"
 import type { GLTF } from "three-stdlib"
 import laptopModelUrl from "../assets/laptop/mac-draco.glb"
-import laptopScreenImage from "../assets/github.com_nbb02.png"
+import laptopScreenImage from "../assets/github.com_nbb02_4_35.png"
 
 type LaptopGLTF = GLTF & {
   nodes: {
