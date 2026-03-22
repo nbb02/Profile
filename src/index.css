@@ -52,17 +52,6 @@ h4 {
   overflow-x: clip;
 }
 
-.bg-grid {
-  position: fixed;
-  inset: 0;
-  z-index: 0;
-  background-image:
-    linear-gradient(rgba(148, 163, 184, 0.08) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(148, 163, 184, 0.08) 1px, transparent 1px);
-  background-size: 34px 34px;
-  pointer-events: none;
-}
-
 .halo {
   position: fixed;
   border-radius: 9999px;

@@ -4,6 +4,7 @@ import Rubiks from "../components/rubiks"
 import Laptop from "../components/laptop"
 import ProfessionalExperience from "../components/ProfessionalExperience"
 import { FaLinkedin } from "react-icons/fa"
+import { Link } from "react-router-dom"
 
 type SkillItem = {
   id: string
@@ -287,7 +288,15 @@ function ProjectsDetails() {
   return (
     <section className="surface-card reveal reveal-delay-2">
       <p className="section-kicker">Featured Work</p>
-      <h2 className="section-title">Projects & Systems — Highlights</h2>
+      <div className="flex items-center justify-between gap-4">
+        <h2 className="section-title">Projects & Systems — Highlights</h2>
+        <Link
+          to="/projects"
+          className="ml-4 inline-flex items-center px-3 py-1.5 rounded-md bg-indigo-600 text-white text-sm font-semibold shadow hover:bg-indigo-700 transition-colors"
+        >
+          View all projects
+        </Link>
+      </div>
       <div className="mt-6 grid grid-cols-1 md:grid-cols-2 gap-6">
         <div className="space-y-4">
           <div className="project-card">
@@ -303,10 +312,12 @@ function ProjectsDetails() {
               <li>WebSocket-based real-time assignment</li>
               <li>Redis-backed performance optimizations</li>
               <li>BullMQ job queue management</li>
+              <li>Prometheus + Grafana monitoring and alerting</li>
             </ul>
             <div className="mt-3 text-sm">
               <strong>Technologies:</strong> MySQL, Express.js, React, AWS,
-              Redis, WebSocket, Cron, BullMQ, Google Maps APIs
+              Redis, WebSocket, Cron, BullMQ, Prometheus, Grafana, Google Maps
+              APIs
             </div>
           </div>
 
@@ -583,6 +594,56 @@ export default function Profile() {
       </main>
 
       <ProfessionalExperience />
+
+      <div>
+        <section className="surface-card p-2 flex items-center justify-between gap-4">
+          <div className="flex items-center gap-3 text-sm text-slate-700">
+            <span className="font-semibold">References:</span>
+            <a
+              href="https://skfb.ly/opCGZ"
+              target="_blank"
+              rel="noreferrer"
+              className="underline"
+            >
+              Rubik's Cube
+            </a>
+            <span className="text-slate-400">|</span>
+            <a
+              href="https://codesandbox.io/p/sandbox/9keg6"
+              target="_blank"
+              rel="noreferrer"
+              className="underline"
+            >
+              Laptop
+            </a>
+            <span className="text-slate-400">|</span>
+            <a
+              href="https://skfb.ly/oy8RZ"
+              target="_blank"
+              rel="noreferrer"
+              className="underline"
+            >
+              Sun
+            </a>
+            <span className="text-slate-400">|</span>
+            <a
+              href="https://skfb.ly/6TwGU"
+              target="_blank"
+              rel="noreferrer"
+              className="underline"
+            >
+              Moon
+            </a>
+          </div>
+
+          <Link
+            to="/references"
+            className="inline-flex items-center px-4 py-2 rounded-md bg-indigo-600 text-white text-sm font-semibold shadow hover:bg-indigo-700 transition-colors"
+          >
+            View full references
+          </Link>
+        </section>
+      </div>
     </div>
   )
 }
