@@ -7,11 +7,14 @@ import {
   useTexture,
   ContactShadows,
   OrbitControls,
+  Html,
 } from "@react-three/drei"
 import { Suspense, useEffect, useRef } from "react"
+import { useNavigate } from "react-router-dom"
 import type { GLTF } from "three-stdlib"
 import laptopModelUrl from "../assets/laptop/mac-draco.glb"
 import laptopScreenImage from "../assets/github.com_nbb02_4_35.png"
+import { TbHandClick } from "react-icons/tb"
 
 type LaptopGLTF = GLTF & {
   nodes: {
@@ -39,7 +42,7 @@ function getTextureOffsetY(scroll: number, maxOffset: number) {
   return SCREEN_TEXTURE_FLIP_Y ? maxOffset - scroll : scroll
 }
 
-function Model() {
+function Model({ onScreenClick }: { onScreenClick?: () => void }) {
   const group = useRef<THREE.Group>(null)
   const screenScrollRef = useRef(0)
   const maxTextureOffsetRef = useRef(0)
@@ -198,11 +201,39 @@ function Model() {
             onPointerOut={() => {
               isScreenHoveredRef.current = false
             }}
+            onClick={(event) => {
+              event.stopPropagation()
+              if (onScreenClick) onScreenClick()
+            }}
           >
             <meshBasicMaterial ref={screenMaterialRef} toneMapped={false} />
           </mesh>
         </group>
       </group>
+      <Html
+        position={[0, 2.6, 0]}
+        transform
+        occlude={false}
+        style={{ pointerEvents: "none", width: "160px", textAlign: "center" }}
+        center
+      >
+        <div style={{ display: "flex", justifyContent: "center" }}>
+          <div
+            style={{
+              padding: "8px 12px",
+              borderRadius: 9999,
+              background: "rgba(0,0,0,0.65)",
+              color: "white",
+              fontSize: 13,
+              opacity: 0.95,
+              animation: "fadeBlink 1.6s ease-in-out infinite",
+            }}
+          >
+            <TbHandClick size={30} />
+          </div>
+        </div>
+        <style>{`@keyframes fadeBlink{0%{opacity:0}30%{opacity:0.95}70%{opacity:0.6}100%{opacity:0}}`}</style>
+      </Html>
       <mesh
         material={materials.keys}
         geometry={nodes.keyboard.geometry}
@@ -230,13 +261,16 @@ function Model() {
 useGLTF.preload(laptopModelUrl)
 
 export default function Laptop() {
+  const navigate = useNavigate()
+  const navigateToDesktop = () => navigate("/desktop")
+
   return (
     <>
       <Canvas camera={{ position: [-5, 0, -15], fov: 55 }} dpr={[1, 2]}>
         <pointLight position={[10, 10, 10]} intensity={1.5} />
         <Suspense fallback={null}>
           <group rotation={[0, Math.PI, 0]} position={[0, 1, 0]}>
-            <Model />
+            <Model onScreenClick={() => navigateToDesktop()} />
           </group>
           <Environment preset="city" />
         </Suspense>

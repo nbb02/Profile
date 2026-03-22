@@ -1,11 +1,14 @@
 import { useState, useRef, useCallback, type ReactNode } from "react"
+import githubImg from "../assets/github.com_nbb02.png"
 import Draggable from "react-draggable"
 import ViTech from "./desktop/vitech"
+import { FaGithub } from "react-icons/fa"
+import { IoMdClose } from "react-icons/io"
 
 interface AppDef {
   id: string
   label: string
-  icon: string
+  icon: string | ReactNode
   link?: string
   dock: boolean
   Content: () => ReactNode
@@ -272,11 +275,28 @@ const APPS: AppDef[] = [
   },
   {
     id: "profile",
-    label: "Profile",
+    label: "Back to Profile",
     icon: "👤",
     link: "/",
     dock: false,
     Content: () => null,
+  },
+  {
+    id: "github",
+    label: "GitHub",
+    icon: <FaGithub />,
+    dock: false,
+    Content: () => (
+      <div
+        style={{ flex: 1, overflow: "auto", padding: 12, background: "#fff" }}
+      >
+        <img
+          src={githubImg}
+          alt="GitHub"
+          style={{ display: "block", width: "100%", height: "auto" }}
+        />
+      </div>
+    ),
   },
   {
     id: "vitech",
@@ -410,14 +430,16 @@ function AppWindow({
         <ResizeHandles startResize={startResize} />
         <div style={{ ...s.window, width: "100%", height: "100%" }}>
           <div className="win-titlebar" style={s.titleBar}>
-            <button style={s.closeBtn} onClick={onClose}>
-              <span style={{ fontSize: 9, color: "#900", fontWeight: 900 }}>
-                ✕
-              </span>
-            </button>
             <span style={s.titleText}>
               {app.icon} {app.label}
             </span>
+            <button style={s.closeBtn} onClick={onClose}>
+              <span
+                style={{ fontSize: "1.2em", color: "#900", fontWeight: 900 }}
+              >
+                <IoMdClose />
+              </span>
+            </button>
           </div>
           <div
             style={{
@@ -516,6 +538,8 @@ const ICON_POSITIONS: Record<string, { x: number; y: number }> = {
   photos: { x: 20, y: 404 },
   settings: { x: 20, y: 500 },
   vitech: { x: 20, y: 600 },
+  profile: { x: window.innerWidth - 92, y: 20 },
+  github: { x: window.innerWidth - 92, y: 116 },
 }
 
 const makeInitialIcons = (): IconState[] =>
@@ -529,7 +553,16 @@ const makeInitialIcons = (): IconState[] =>
 
 export default function Grid() {
   const [icons, setIcons] = useState<IconState[]>(makeInitialIcons)
-  const [windows, setWindows] = useState<WindowState[]>([])
+  const [windows, setWindows] = useState<WindowState[]>(() => [
+    {
+      id: "github",
+      size: { w: 800, h: 650 },
+      pos: {
+        x: Math.max(20, Math.round(window.innerWidth / 2 - 800 / 2)),
+        y: Math.max(20, Math.round(window.innerHeight / 2 - 720 / 2)),
+      },
+    },
+  ])
   const [zMap, setZMap] = useState<Record<string, number>>({})
   const topZ = useRef(20)
   const [dockHover, setDockHover] = useState<string | null>(null)
@@ -547,8 +580,25 @@ export default function Grid() {
           ...prev,
           {
             id,
-            pos: { x: 160 + Math.random() * 220, y: 60 + Math.random() * 120 },
-            size: id === "vitech" ? { w: 1200, h: 720 } : { w: 480, h: 360 },
+            pos:
+              id === "github"
+                ? {
+                    x: Math.max(
+                      20,
+                      Math.round(window.innerWidth / 2 - 800 / 2),
+                    ),
+                    y: Math.max(
+                      20,
+                      Math.round(window.innerHeight / 2 - 720 / 2),
+                    ),
+                  }
+                : { x: 160 + Math.random() * 220, y: 60 + Math.random() * 120 },
+            size:
+              id === "vitech"
+                ? { w: 1200, h: 720 }
+                : id === "github"
+                  ? { w: 800, h: 650 }
+                  : { w: 480, h: 360 },
           },
         ]
       })
@@ -671,12 +721,11 @@ const s: Record<string, React.CSSProperties> = {
   closeBtn: {
     width: 14,
     height: 14,
-    borderRadius: "50%",
-    background: "#ff5f57",
     border: "none",
     cursor: "pointer",
     flexShrink: 0,
     boxShadow: "0 0 0 .5px rgba(0,0,0,.2)",
+    color: "red",
     display: "flex",
     alignItems: "center",
     justifyContent: "center",

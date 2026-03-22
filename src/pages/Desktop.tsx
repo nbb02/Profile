@@ -36,6 +36,7 @@ export default function Desktop() {
       </div>
 
       <div className="text-white h-full h-[94vh]">
+        <div className="bg-grid fixed left-0 top-0 w-full h-full"></div>
         <Grid />
       </div>
     </div>

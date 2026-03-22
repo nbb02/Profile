@@ -4,7 +4,6 @@ import Rubiks from "../components/rubiks"
 import Laptop from "../components/laptop"
 import ProfessionalExperience from "../components/ProfessionalExperience"
 import { FaLinkedin } from "react-icons/fa"
-import { Link } from "react-router-dom"
 
 type SkillItem = {
   id: string
@@ -185,8 +184,6 @@ const SKILL_CATEGORIES = [
   },
 ]
 
-const categories: SkillCategory[] = SKILL_CATEGORIES
-
 function TechMarquee({ categories }: { categories: SkillCategory[] }) {
   const items = categories.flatMap((c) => c.items)
   const tripled = [...items, ...items, ...items]
@@ -286,35 +283,6 @@ function TechMarquee({ categories }: { categories: SkillCategory[] }) {
   )
 }
 
-function Skills() {
-  return (
-    <div className="skills-root">
-      {categories.map((cat) => (
-        <div key={cat.name} className="skill-category surface-card mb-6 reveal">
-          <h4 className="text-xl font-semibold tracking-tight text-slate-900">
-            {cat.name}
-          </h4>
-          <div className="skill-list">
-            <ul className="m-0 p-0 flex flex-wrap gap-2">
-              {cat.items.map((it) => (
-                <li key={it.id} className="skill-row">
-                  <img
-                    src={it.img}
-                    alt={it.label}
-                    style={{ objectFit: "contain" }}
-                    className="min-h:[5em]"
-                  />
-                  {/* <span className="text-slate-700">{it.label}</span> */}
-                </li>
-              ))}
-            </ul>
-          </div>
-        </div>
-      ))}
-    </div>
-  )
-}
-
 function ProjectsDetails() {
   return (
     <section className="surface-card reveal reveal-delay-2">
@@ -322,33 +290,6 @@ function ProjectsDetails() {
       <h2 className="section-title">Projects & Systems — Highlights</h2>
       <div className="mt-6 grid grid-cols-1 md:grid-cols-2 gap-6">
         <div className="space-y-4">
-          <div className="project-card">
-            <h3 className="font-medium text-lg">
-              Booking & Reservation Systems
-            </h3>
-            <p className="mt-2 text-slate-600 text-sm">
-              End-to-end booking platforms with scheduling, availability
-              management, role-based access, and transactional workflows.
-            </p>
-            <ul className="mt-3 list-disc list-inside text-sm text-slate-600">
-              <li>Booking lifecycle management</li>
-              <li>Admin & user dashboards</li>
-              <li>Secure authentication and authorization</li>
-              <li>Scalable REST APIs</li>
-            </ul>
-            <div className="mt-3 text-sm">
-              <strong>Projects:</strong>
-              <ul className="list-disc list-inside ml-5">
-                <li>
-                  <strong>arc</strong> — Places booking system
-                </li>
-                <li>
-                  <strong>wrc</strong> — Events and social system
-                </li>
-              </ul>
-            </div>
-          </div>
-
           <div className="project-card">
             <h3 className="font-medium text-lg">
               Location-Based Real-Time Booking
@@ -371,6 +312,34 @@ function ProjectsDetails() {
 
           <div className="project-card">
             <h3 className="font-medium text-lg">
+              Booking & Reservation Systems
+            </h3>
+            <p className="mt-2 text-slate-600 text-sm">
+              End-to-end booking platforms with scheduling, availability
+              management, role-based access, and transactional workflows.
+            </p>
+            <ul className="mt-3 list-disc list-inside text-sm text-slate-600">
+              <li>Booking lifecycle management</li>
+              <li>Admin & user dashboards</li>
+              <li>Secure authentication and authorization</li>
+            </ul>
+            <div className="mt-3 text-sm">
+              <strong>Projects:</strong>
+              <ul className="list-disc list-inside ml-5">
+                <li>
+                  <strong>arc</strong> — Places booking system
+                </li>
+                <li>
+                  <strong>wrc</strong> — Events and social system
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div className="space-y-4">
+          <div className="project-card">
+            <h3 className="font-medium text-lg">
               Data Processing & Visualization
             </h3>
             <p className="mt-2 text-slate-600 text-sm">
@@ -380,16 +349,11 @@ function ProjectsDetails() {
             <div className="mt-3 text-sm">
               <strong>Notable:</strong>
               <ul className="list-disc list-inside ml-5">
-                <li>POS and Inventory System — React + Firebase (Jan 2024)</li>
-                <li>
-                  Population Management System — Laravel + React (Jan 2024)
-                </li>
+                <li>POS and Inventory System — React + Firebase (2024)</li>
+                <li>Population Management System — Laravel + React (2024)</li>
               </ul>
             </div>
           </div>
-        </div>
-
-        <div className="space-y-4">
           <div className="project-card">
             <h3 className="font-medium text-lg">E-Commerce & Management</h3>
             <p className="mt-2 text-slate-600 text-sm">
@@ -402,7 +366,7 @@ function ProjectsDetails() {
                 <li>
                   <strong>rst</strong> — E-commerce platform
                 </li>
-                <li>4x Laravel e-commerce systems (Jan 2025)</li>
+                <li>4x Laravel e-commerce systems (2025)</li>
                 <li>Multiple management systems (cra, pct, ia, pm)</li>
               </ul>
             </div>
@@ -497,12 +461,6 @@ export default function Profile() {
 
   return (
     <div className="app-shell min-h-screen antialiased">
-      <Link
-        to="/desktop"
-        className="absolute right-1 top-1 p-2 border border-slate-300 bg-white text-slate-700 shadow-sm transition hover:-translate-y-0.5 hover:text-sky-700"
-      >
-        Desktop
-      </Link>
       <div className="bg-grid" aria-hidden="true" />
       <div className="halo halo-1" aria-hidden="true" />
       <div className="halo halo-2" aria-hidden="true" />
@@ -514,7 +472,7 @@ export default function Profile() {
             Hi there 👋, I&apos;m Nathaniel B. Berres
             <span className="hero-accent"> Software Engineer</span>
           </h1>
-          <div className="mt-5 text-lg text-slate-600 max-w-4xl space-y-3 text-justify">
+          {/* <div className="mt-5 text-lg text-slate-600 max-w-4xl space-y-3 text-justify">
             <p>
               I&apos;m a Software Engineer passionate about building scalable,
               production-ready systems. I started my coding journey in August
@@ -529,7 +487,7 @@ export default function Profile() {
               designing APIs and job queues to building responsive frontends and
               live-tracking interfaces.
             </p>
-          </div>
+          </div> */}
 
           <div className="mt-6 flex items-center gap-3">
             <a
@@ -560,12 +518,16 @@ export default function Profile() {
               <span className="stat-value">Fullstack + Realtime</span>
             </div>
             <div className="stat-pill">
-              <span className="stat-title">Core Focus</span>
-              <span className="stat-value">Booking, APIs, Live Tracking</span>
+              <span className="stat-title">Recent Builds</span>
+              <span className="stat-value">
+                Booking Systems & Real-Time APIs
+              </span>
             </div>
             <div className="stat-pill">
               <span className="stat-title">Primary Stack</span>
-              <span className="stat-value">React, Node.js, Laravel, AWS</span>
+              <span className="stat-value">
+                Node.js, React, MySQL, Laravel, AWS
+              </span>
             </div>
           </div>
         </div>
@@ -614,14 +576,6 @@ export default function Profile() {
         <div className="surface-card reveal reveal-delay-1">
           <TechMarquee categories={SKILL_CATEGORIES} />
         </div>
-
-        <section className="surface-card reveal reveal-delay-2">
-          <p className="section-kicker">Depth</p>
-          <h2 className="section-title">Skills & Proficiency</h2>
-          <div className="mt-5">
-            <Skills />
-          </div>
-        </section>
 
         <div className="mt-6">
           <ProjectsDetails />

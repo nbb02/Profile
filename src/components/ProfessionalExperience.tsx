@@ -51,7 +51,7 @@ type SceneStyles = {
 
 const ROLES: RoleItem[] = [
   {
-    title: "Software Engineer (Co-Owner)",
+    title: "Software Engineer",
     company: "WeMove Technology Inc.",
     range: "September 2025 - March 2026",
     highlights: [
@@ -419,7 +419,7 @@ export default function ProfessionalExperience() {
                 </p>
                 <ul className="professional-role-list">
                   {role.highlights.map((point) => (
-                    <li key={point}>{point}</li>
+                    <li key={point}>- {point}</li>
                   ))}
                 </ul>
               </article>
