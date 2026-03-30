@@ -16,8 +16,8 @@ import {
 import gsap from "gsap"
 import { ScrollTrigger } from "gsap/ScrollTrigger"
 import * as THREE from "three"
-import sunModelUrl from "../assets/sun/scene.gltf?url"
-import moonModelUrl from "../assets/moon/scene.gltf?url"
+const sunModelUrl = "/assets/sun/sun/scene.gltf"
+const moonModelUrl = "/assets/moon/scene.gltf"
 
 type RoleItem = {
   title: string
@@ -52,7 +52,7 @@ type SceneStyles = {
 const ROLES: RoleItem[] = [
   {
     title: "Software Engineer",
-    company: "WeMove Technology Inc.",
+    company: "Logistics and Technology Company*",
     range: "September 2025 - March 2026",
     highlights: [
       "Built and launched a logistics platform competing with Lalamove and Grab, reaching ~50k registered users.",
@@ -72,7 +72,7 @@ const ROLES: RoleItem[] = [
   },
   {
     title: "Intern to Junior Back-End Developer",
-    company: "8Box Solutions Inc",
+    company: "Technology Solutions Provider*",
     range: "January 2025 - September 2025",
     highlights: [
       "Developed backend services using Node.js and Express.js integrated with MySQL.",

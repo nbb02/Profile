@@ -3,7 +3,7 @@ import { Canvas, useFrame } from "@react-three/fiber"
 import { OrbitControls, useGLTF, Float, Environment } from "@react-three/drei"
 import type { GLTF } from "three-stdlib"
 import * as THREE from "three"
-import modelUrl from "../assets/rubiks_cube/rubiks_cube.gltf?url"
+const modelUrl = "/assets/rubiks_cube/rubiks_cube/rubiks_cube.gltf"
 
 export default function Rubiks() {
   function RubiksModel() {
