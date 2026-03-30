@@ -3,6 +3,7 @@ import type { IconType } from "react-icons"
 import Rubiks from "../components/rubiks"
 import Laptop from "../components/laptop"
 import ProfessionalExperience from "../components/ProfessionalExperience"
+import InteractiveCards from "../components/InteractiveCards"
 import { FaLinkedin } from "react-icons/fa"
 import { Link } from "react-router-dom"
 
@@ -155,6 +156,21 @@ const SKILL_CATEGORIES = [
         id: "cloudflare",
         label: "Cloudflare",
         img: "https://img.shields.io/badge/Cloudflare-F38020?logo=cloudflare&logoColor=white",
+      },
+      {
+        id: "prometheus",
+        label: "Prometheus",
+        img: "https://img.shields.io/badge/Prometheus-E6522C?logo=prometheus&logoColor=white",
+      },
+      {
+        id: "grafana",
+        label: "Grafana",
+        img: "https://img.shields.io/badge/Grafana-F46800?logo=grafana&logoColor=white",
+      },
+      {
+        id: "loki",
+        label: "Loki",
+        img: "https://img.shields.io/badge/Loki-00A9B5?logo=loki&logoColor=white",
       },
     ],
   },
@@ -449,6 +465,9 @@ export default function Profile() {
         "https://img.shields.io/badge/Google_Cloud-4285F4?logo=googlecloud&logoColor=white",
         "https://img.shields.io/badge/DigitalOcean-0080FF?logo=digitalocean&logoColor=white",
         "https://img.shields.io/badge/Cloudflare-F38020?logo=cloudflare&logoColor=white",
+        "https://img.shields.io/badge/Prometheus-E6522C?logo=prometheus&logoColor=white",
+        "https://img.shields.io/badge/Grafana-F46800?logo=grafana&logoColor=white",
+        "https://img.shields.io/badge/Loki-00A9B5?logo=loki&logoColor=white",
         "https://img.shields.io/badge/Hostinger-6736C6?logo=hostinger&logoColor=white",
       ],
     },
@@ -580,7 +599,7 @@ export default function Profile() {
           </div>
         </section>
 
-        <div className="reveal reveal-delay-2 h-[40em]">
+        <div className="reveal reveal-delay-2 h-[40em] overflow-visible mb-0">
           <Laptop />
         </div>
 
@@ -591,6 +610,8 @@ export default function Profile() {
         <div className="mt-6">
           <ProjectsDetails />
         </div>
+
+        <InteractiveCards />
       </main>
 
       <ProfessionalExperience />
