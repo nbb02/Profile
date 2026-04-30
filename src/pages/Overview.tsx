@@ -1,3 +1,5 @@
+import { useState, useEffect } from "react"
+
 type ProjectDef = {
   title: string
   code?: string
@@ -5,6 +7,7 @@ type ProjectDef = {
   description: string
   highlights?: string[]
   techs: string[]
+  images?: string[]
 }
 
 type CategoryDef = {
@@ -93,8 +96,49 @@ function TechBadge({ tech }: { tech: string }) {
 }
 
 function ProjectCard({ p }: { p: ProjectDef }) {
+  const [currentImageIndex, setCurrentImageIndex] = useState(0)
+
+  // Auto-rotate images every 3 seconds
+  useEffect(() => {
+    if (!p.images || p.images.length <= 1) return
+
+    const interval = setInterval(() => {
+      setCurrentImageIndex((prev) => (prev + 1) % p.images!.length)
+    }, 3000)
+
+    return () => clearInterval(interval)
+  }, [p.images])
+
+  const currentImage = p.images?.[currentImageIndex] || p.images?.[0]
+
   return (
-    <div className="project-card glass p-5 rounded-lg border border-slate-200/40 backdrop-blur-md hover:shadow-lg hover:border-indigo-300/40 transition-all duration-300">
+    <div className="h-max project-card glass p-5 rounded-lg border border-slate-200/40 backdrop-blur-md hover:shadow-lg hover:border-indigo-300/40 transition-all duration-300">
+      {currentImage && (
+        <div className="mb-4 -m-1 relative overflow-hidden rounded-lg">
+          <img
+            src={currentImage}
+            alt={`${p.title} preview`}
+            className="w-full h-48 object-cover transition-all duration-700 ease-in-out hover:scale-105"
+          />
+          {/* Image indicator dots */}
+          {p.images && p.images.length > 1 && (
+            <div className="absolute bottom-2 left-1/2 transform -translate-x-1/2 flex gap-1">
+              {p.images.map((_, idx) => (
+                <div
+                  key={idx}
+                  className={`w-2 h-2 rounded-full transition-all duration-300 ${
+                    idx === currentImageIndex
+                      ? "bg-white shadow-lg"
+                      : "bg-white/50"
+                  }`}
+                />
+              ))}
+            </div>
+          )}
+          {/* Gradient overlay for better text readability */}
+          <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent pointer-events-none" />
+        </div>
+      )}
       <div className="flex items-start justify-between gap-4">
         <div className="flex-1">
           <div className="flex items-center gap-2">
@@ -146,48 +190,6 @@ function ProjectCard({ p }: { p: ProjectDef }) {
         </div>
       </div>
     </div>
-  )
-}
-
-function CategorySection({ category }: { category: CategoryDef }) {
-  return (
-    <section className="space-y-5">
-      <div className="glass border border-slate-200/40 rounded-2xl p-8 backdrop-blur-md">
-        <div className="border-l-4 border-indigo-500 pl-6">
-          <h2 className="text-2xl font-bold text-slate-900">
-            {category.title}
-          </h2>
-          <p className="mt-2 text-base text-slate-700 max-w-3xl leading-relaxed">
-            {category.description}
-          </p>
-
-          {category.highlights && category.highlights.length > 0 && (
-            <div className="mt-5 space-y-2.5">
-              {category.highlights.map((h, i) => (
-                <div key={i} className="flex gap-3 text-sm text-slate-700">
-                  <span className="text-teal-600 font-semibold flex-shrink-0">
-                    ✓
-                  </span>
-                  <span>{h}</span>
-                </div>
-              ))}
-            </div>
-          )}
-
-          <div className="mt-6 flex flex-wrap gap-3">
-            {category.keyTechs.map((t) => (
-              <TechBadge key={t} tech={t} />
-            ))}
-          </div>
-        </div>
-      </div>
-
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
-        {category.projects.map((p) => (
-          <ProjectCard key={`${category.id}-${p.title}`} p={p} />
-        ))}
-      </div>
-    </section>
   )
 }
 
@@ -321,6 +323,36 @@ const CATEGORIES: CategoryDef[] = [
         ],
         techs: ["Laravel", "React", "MySQL"],
       },
+      {
+        title: "ViTech Analytics Platform",
+        code: "vitech",
+        role: "Fullstack",
+        description:
+          "Comprehensive data analytics and visualization platform for population demographics, sector analysis, and administrative management with QR scanning and export capabilities.",
+        highlights: [
+          "Interactive dashboards with sector-based filtering",
+          "QR scanner integration for member management",
+          "Exportable reports and data visualization",
+          "Role-based access control and audit trails",
+        ],
+        techs: ["Laravel", "MySQL", "React", "SCSS"],
+        images: [
+          "/assets/projects/vitech/dashboard.png",
+          "/assets/projects/vitech/dashboard-full.png",
+          "/assets/projects/vitech/dashboard-2.png",
+          "/assets/projects/vitech/dashboard-groupings.png",
+          "/assets/projects/vitech/dashboard-export.png",
+          "/assets/projects/vitech/exploration-full.png",
+          "/assets/projects/vitech/members-list.png",
+          "/assets/projects/vitech/member-qr.png",
+          "/assets/projects/vitech/accounts.png",
+          "/assets/projects/vitech/settings-sectors.png",
+          "/assets/projects/vitech/settings-programs.png",
+          "/assets/projects/vitech/settings-inputs.png",
+          "/assets/projects/vitech/settings-colors.png",
+          "/assets/projects/vitech/reports.png",
+        ],
+      },
     ],
   },
   {
@@ -424,11 +456,48 @@ const CATEGORIES: CategoryDef[] = [
         ],
         techs: ["Git", "GitHub", "Docker", "GitHub Actions", "WSL", "VSCode"],
       },
+      {
+        title: "Load Balancer + Observability Platform",
+        code: "monitoring",
+        role: "Backend",
+        description:
+          "Containerized multi-instance backend system with NGINX load balancing, JWT authentication, Socket.IO realtime messaging, and comprehensive monitoring stack.",
+        highlights: [
+          "Multi-instance load balancing with NGINX",
+          "Full observability stack (Prometheus, Grafana, Loki)",
+          "Application metrics and service exporters",
+          "Resilience testing with failure simulation",
+        ],
+        techs: [
+          "Node.js",
+          "Express",
+          "PostgreSQL",
+          "Redis",
+          "NGINX",
+          "Docker",
+          "Prometheus",
+          "Grafana",
+          "Socket.IO",
+          "JWT",
+        ],
+        images: [
+          "/assets/projects/load-balancer-monitoring/Load Balancer Visualizer.png",
+          "/assets/projects/load-balancer-monitoring/HTTP Monitoring.png",
+          "/assets/projects/load-balancer-monitoring/Docker Monitoring.png",
+          "/assets/projects/load-balancer-monitoring/Docker Desktop.png",
+          "/assets/projects/load-balancer-monitoring/Postgresql Exporter.png",
+          "/assets/projects/load-balancer-monitoring/Redis Exporter.png",
+          "/assets/projects/load-balancer-monitoring/Node Exporter.png",
+        ],
+      },
     ],
   },
 ]
 
 export default function Overview() {
+  // Flatten all projects from all categories
+  const allProjects = CATEGORIES.flatMap((category) => category.projects)
+
   return (
     <main className="flex-1 space-y-12">
       <div className="space-y-3">
@@ -441,9 +510,11 @@ export default function Overview() {
         </p>
       </div>
 
-      <div className="space-y-16">
-        {CATEGORIES.map((category) => (
-          <CategorySection key={category.id} category={category} />
+      <div className="columns-1 md:columns-2 lg:columns-3 gap-3 space-y-3">
+        {allProjects.map((p, i) => (
+          <div key={i} className="break-inside-avoid mb-3 inline-block w-full">
+            <ProjectCard p={p} />
+          </div>
         ))}
       </div>
     </main>

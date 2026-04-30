@@ -45,6 +45,14 @@ export default function Sidebar() {
                 ViTech
               </NavLink>
             </li>
+            <li>
+              <NavLink
+                to="/projects/load-balancer-monitoring"
+                className={({ isActive }) => linkClass(isActive)}
+              >
+                Load Balancer Monitoring
+              </NavLink>
+            </li>
           </ul>
         </nav>
       </div>
